@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:peliculas/src/widgets/CardSwiperWidget.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -27,18 +27,8 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _swiperTarjetas(){
-    return Container(
-      width: double.infinity,
-      height: 300.0,
-      child: Swiper(
-        itemBuilder: (BuildContext context,int index){
-          return new Image.network("https://elluchador.info/web/wp-content/uploads/2019/12/lo-emjor-del-cine.jpg",fit: BoxFit.fill);
-        },
-        itemCount: 3,
-        itemWidth: 300.0,
-        itemHeight: 400.0,
-        layout: SwiperLayout.TINDER,
-      ),
+    return CardSwiper(
+      peliculas: [1,2,3,4,5],
     );
   }
 
