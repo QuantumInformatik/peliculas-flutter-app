@@ -14,14 +14,29 @@ class PeliculasProvider{
       'api_key':_apikey,
       'lenguage':_lenguaje
     });
-    print(url);
-    
-    final respuesta = await http.get(url);
+    return await _procesarRespuesta(url);
+
+  }
+
+  Future<List<Pelicula>> getPopulares() async {
+    final url = Uri.https(_url, '$_apiVersion/movie/popular',{
+      'api_key':_apikey,
+      'lenguage':_lenguaje
+    });
+    return await _procesarRespuesta(url);
+
+
+  }
+
+  Future<List<Pelicula>> _procesarRespuesta(Uri uri) async {
+    print(uri);
+
+    final respuesta = await http.get(uri);
     final dataDecodificada = json.decode(respuesta.body);
 
     final peliculas = new Peliculas.fromJsonList(dataDecodificada['results']);
 
     return peliculas.items;
-
   }
+
 }

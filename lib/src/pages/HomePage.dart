@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:peliculas/src/providers/PeliculasProviders.dart';
 import 'package:peliculas/src/widgets/CardSwiperWidget.dart';
@@ -9,6 +10,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
@@ -23,12 +25,38 @@ class HomePage extends StatelessWidget {
       ),
       body: Container(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _swiperTarjetas()
+            _swiperTarjetas(),
+            _footer(context)
           ],
         ),
       )
     );
+  }
+
+
+  Widget _footer(BuildContext context){
+
+    return Container(
+        width: double.infinity,
+        color: Colors.amber,
+        child: Column(
+          children: [
+            Text('Populares', style: Theme.of(context).textTheme.subtitle1),
+            FutureBuilder(
+              future: peliculasProvider.getPopulares(),
+              builder: (BuildContext context, AsyncSnapshot<List> asyncSnapshot){
+                asyncSnapshot.data?.forEach((pelicula) =>print(pelicula.title));
+                return Container();
+                
+              },
+            )
+          ],
+        ),
+    );
+
+
   }
 
   Widget _swiperTarjetas(){
