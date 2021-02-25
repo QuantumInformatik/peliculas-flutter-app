@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:peliculas/src/models/Pelicula.dart';
 
@@ -35,7 +36,7 @@ class MovieHorizontal extends StatelessWidget {
   }
 
   Widget _crearTarjeta(BuildContext context, Pelicula pelicula){
-    return Container(
+    final tarjetaPelicula =  Container(
       margin: EdgeInsets.only(right: 15.0),
       child: Column(
         children: [
@@ -45,7 +46,7 @@ class MovieHorizontal extends StatelessWidget {
               image: NetworkImage(pelicula.getPosterImg()),
               placeholder: AssetImage('assets/img/no-image.jpg'),
               fit: BoxFit.cover,
-              height: 155.0,
+              height: 130.0,
             ),
           ),
           SizedBox(height: 5.0,),
@@ -59,6 +60,15 @@ class MovieHorizontal extends StatelessWidget {
         ],
       ),
     );
+
+    return GestureDetector(
+      child: tarjetaPelicula,
+      onTap: (){
+        Navigator.pushNamed(context, 'detallePelicula', arguments: pelicula);
+      },
+    );
+
+
   }
 
   @Deprecated('Este metodo fue util, pero consume mucha memoria ram')

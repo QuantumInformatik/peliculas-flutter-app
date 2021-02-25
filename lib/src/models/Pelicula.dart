@@ -76,4 +76,11 @@ class Pelicula {
     return 'https://image.tmdb.org/t/p/w500/$posterPath';
   }
 
+  getBackGroundImg(){
+    if(posterPath==null){
+      return 'https://thumbs.dreamstime.com/b/no-image-available-icon-photo-camera-flat-vector-illustration-132483097.jpg';
+    }
+    return 'https://image.tmdb.org/t/p/w500/$backdropPath';
+  }
+
 }
