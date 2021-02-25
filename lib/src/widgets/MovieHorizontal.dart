@@ -22,14 +22,46 @@ class MovieHorizontal extends StatelessWidget {
 
     return Container(
       height: _screenSize.height*0.23,
-      child: PageView(
+      child: PageView.builder(
         pageSnapping: false,
         controller: _pageController,
-        children: _tarjetas(context),
+        itemCount: peliculas.length,
+        itemBuilder: (context, index){
+          return _crearTarjeta(context, peliculas[index]);
+
+        },
       ),
     );
   }
 
+  Widget _crearTarjeta(BuildContext context, Pelicula pelicula){
+    return Container(
+      margin: EdgeInsets.only(right: 15.0),
+      child: Column(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20.0),
+            child: FadeInImage(
+              image: NetworkImage(pelicula.getPosterImg()),
+              placeholder: AssetImage('assets/img/no-image.jpg'),
+              fit: BoxFit.cover,
+              height: 155.0,
+            ),
+          ),
+          SizedBox(height: 5.0,),
+          Center(
+            child: Text(
+              pelicula.title,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.subtitle1,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  @Deprecated('Este metodo fue util, pero consume mucha memoria ram')
   List<Widget> _tarjetas(BuildContext context){
     return peliculas.map((pelicula){
       return Container(
