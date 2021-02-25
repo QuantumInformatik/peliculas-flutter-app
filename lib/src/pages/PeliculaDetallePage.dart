@@ -13,38 +13,65 @@ class PeliculaDetallePage extends StatelessWidget {
         slivers: <Widget>[
           _crearAppBar(pelicula),
           //esto para abao es simplmenete para poder hacer el efecto del deslisado hacia arriba
-          SliverGrid(
-            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200.0,
-              mainAxisSpacing: 10.0,
-              crossAxisSpacing: 10.0,
-              childAspectRatio: 4.0,
-            ),
-            delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                return Container(
-                  alignment: Alignment.center,
-                  color: Colors.teal[100 * (index % 9)],
-                  child: Text('Grid Item $index'),
-                );
-              },
-              childCount: 20,
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                SizedBox(height: 10.0,),
+                _posterTitulo(context, pelicula),
+                _descripcion(pelicula),
+                _descripcion(pelicula),
+                _descripcion(pelicula),
+                _descripcion(pelicula),
+                _descripcion(pelicula),
+                _descripcion(pelicula)
+              ]
             ),
           ),
-          SliverFixedExtentList(
-            itemExtent: 50.0,
-            delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                return Container(
-                  alignment: Alignment.center,
-                  color: Colors.lightBlue[100 * (index % 9)],
-                  child: Text('List Item $index'),
-                );
-              },
-            ),
-          ),
+
         ],
       )
+    );
+  }
+
+  Widget _descripcion(Pelicula pelicula){
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 10.0),
+      child: Text(pelicula.overview, textAlign: TextAlign.justify,),
+
+    );
+  }
+
+  Widget  _posterTitulo(BuildContext context, Pelicula pelicula){
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      child: Row(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20.0),
+            child: Image(
+              image: NetworkImage(pelicula.getPosterImg()),
+              height: 150.0,
+            ),
+          ),
+          SizedBox(width: 20.0,),
+          Flexible(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(pelicula.title, style: Theme.of(context).textTheme.headline6, overflow: TextOverflow.ellipsis,),
+                Text(pelicula.originalTitle, style: Theme.of(context).textTheme.bodyText2,  overflow: TextOverflow.ellipsis,),
+                Row(
+                  children: [
+                    Icon(Icons.star_border),
+                    Text(pelicula.voteAverage.toString(), style:Theme.of(context).textTheme.bodyText1)
+                  ],
+
+                )
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 
