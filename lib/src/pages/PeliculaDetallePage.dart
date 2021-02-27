@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:peliculas/src/models/Actor.dart';
 import 'package:peliculas/src/models/Pelicula.dart';
+import 'package:peliculas/src/providers/PeliculasProviders.dart';
 
 class PeliculaDetallePage extends StatelessWidget {
 
@@ -32,7 +34,8 @@ class PeliculaDetallePage extends StatelessWidget {
                 _descripcion(pelicula),
                 _descripcion(pelicula),
                 _descripcion(pelicula),
-                _descripcion(pelicula)
+                _descripcion(pelicula),
+                _crearCasting(pelicula)
               ]
             ),
           ),
@@ -41,6 +44,73 @@ class PeliculaDetallePage extends StatelessWidget {
       )
     );
   }
+
+  Widget  _crearCasting(Pelicula pelicula){
+    final peliculaProvider = new PeliculasProvider();
+
+    return FutureBuilder(
+      future: peliculaProvider.getCast(pelicula.id.toString()),
+      builder: (context, AsyncSnapshot<List> asyncSnapshot){
+        if(asyncSnapshot.hasData){
+          return _crearActoresPageView(asyncSnapshot.data);
+        }else{
+          return Center(child: CircularProgressIndicator(),);
+        }
+
+      },
+    );
+
+  }
+
+  Widget _crearActoresPageView(List<Actor> actores){
+
+    return SizedBox(
+      height: 200.0,
+      child: PageView.builder(
+        pageSnapping: false,
+        controller: PageController(
+          viewportFraction: 0.3,
+          initialPage: 1
+        ),
+        itemCount: actores.length,
+        itemBuilder: (context, i){
+          return _actorTarjeta(actores[i]);
+        },
+      ),
+    );
+
+  }
+
+  Widget _actorTarjeta(Actor actor){
+
+    final tarjetaActor =  Container(
+      margin: EdgeInsets.only(right: 15.0),
+      child: Column(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20.0),
+            child: FadeInImage(
+              image: NetworkImage(actor.getProfilePathImg()),
+              placeholder: AssetImage('assets/img/no-image.jpg'),
+              fit: BoxFit.cover,
+              height: 130.0,
+            ),
+          ),
+          SizedBox(height: 5.0,),
+          Center(
+            child: Text(
+              actor.name,
+              overflow: TextOverflow.ellipsis,
+            ),
+          )
+        ],
+      ),
+    );
+
+    return tarjetaActor;
+
+  }
+
 
   Widget _descripcion(Pelicula pelicula){
     return Container(
