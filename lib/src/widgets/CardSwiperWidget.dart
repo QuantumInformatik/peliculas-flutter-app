@@ -15,7 +15,6 @@ class CardSwiper extends StatelessWidget {
 
     return Container(
       width: _screeSize.width*0.80,
-      decoration: BoxDecoration(color: Colors.amber) ,
       padding: EdgeInsets.only(top: 10.0),
       margin: EdgeInsets.only(left: 10.0),
       child: Swiper(

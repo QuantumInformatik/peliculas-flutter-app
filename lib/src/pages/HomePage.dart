@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: Container(
-        decoration: BoxDecoration(color: Colors.tealAccent) ,
+        decoration: BoxDecoration(color: Colors.black) ,
         height: _screenSize.height,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -64,15 +64,11 @@ class HomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-                decoration: BoxDecoration(color: Colors.indigo) ,
                 padding: EdgeInsets.only(left: 20.0),
               child: Text('Populares', style: Theme.of(context).textTheme.subtitle1)
             ),
-            SizedBox(height: 5.0,
-              child: Container(
-                decoration: BoxDecoration(color: Colors.indigo) ,
-              ),
-            ),
+            SizedBox(height: 5.0,),
+
             StreamBuilder(
               stream: peliculasProvider.popularesStrem,
               builder: (BuildContext context, AsyncSnapshot<List> asyncSnapshot){

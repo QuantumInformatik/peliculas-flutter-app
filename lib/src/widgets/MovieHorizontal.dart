@@ -24,7 +24,6 @@ class MovieHorizontal extends StatelessWidget {
     return Flexible(
         child: Container(
           height: _screenSize.height*0.23,
-          decoration: BoxDecoration(color: Colors.brown) ,
           child: PageView.builder(
             pageSnapping: false,
             controller: _pageController,
@@ -59,10 +58,7 @@ class MovieHorizontal extends StatelessWidget {
                 ),
               ),
           ),
-          SizedBox(height: 5.0,
-            child:Container(
-              decoration: BoxDecoration(color: Colors.indigo) ,
-            ) ,),
+          SizedBox(height: 5.0),
           Center(
             child: Text(
               pelicula.title,
