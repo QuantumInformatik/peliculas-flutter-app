@@ -18,6 +18,8 @@ class Peliculas{
 
 
 class Pelicula {
+  String idUnico;
+
   bool adult;
   String backdropPath;
   List<int> genreIds;
