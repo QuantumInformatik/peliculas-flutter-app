@@ -11,11 +11,13 @@ class PeliculaDetallePage extends StatelessWidget {
     final Pelicula pelicula = ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
+      backgroundColor: Colors.grey.withOpacity(0.20),
       body: CustomScrollView(
         slivers: <Widget>[
           _crearAppBar(pelicula),
           //esto para abao es simplmenete para poder hacer el efecto del deslisado hacia arriba
           SliverList(
+
             delegate: SliverChildListDelegate(
               [
                 SizedBox(height: 10.0,),
@@ -101,6 +103,10 @@ class PeliculaDetallePage extends StatelessWidget {
             child: Text(
               actor.name,
               overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.white,
+              ),
             ),
           )
         ],
@@ -115,7 +121,13 @@ class PeliculaDetallePage extends StatelessWidget {
   Widget _descripcion(Pelicula pelicula){
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 10.0),
-      child: Text(pelicula.overview, textAlign: TextAlign.justify,),
+      child: Text(pelicula.overview,
+        textAlign: TextAlign.justify,
+        style: TextStyle(
+          fontSize: 15,
+          color: Colors.white,
+        ),
+      ),
 
     );
   }
@@ -140,7 +152,10 @@ class PeliculaDetallePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(pelicula.title, style: Theme.of(context).textTheme.headline6, overflow: TextOverflow.ellipsis,),
+                Text(pelicula.title,
+                  style: Theme.of(context).textTheme.headline6,
+                  overflow: TextOverflow.ellipsis,
+                ),
                 Text(pelicula.originalTitle, style: Theme.of(context).textTheme.bodyText2,  overflow: TextOverflow.ellipsis,),
                 Row(
                   children: [
@@ -161,7 +176,7 @@ class PeliculaDetallePage extends StatelessWidget {
 
     return SliverAppBar(
       elevation: 2.0,
-      backgroundColor: Colors.indigoAccent,
+      backgroundColor: Color(0xFF107D36),
       expandedHeight: 200.0,
       floating: false,
       pinned: true,

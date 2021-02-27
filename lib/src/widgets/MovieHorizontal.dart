@@ -63,7 +63,10 @@ class MovieHorizontal extends StatelessWidget {
             child: Text(
               pelicula.title,
               overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.subtitle1,
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.white
+              ),
             ),
           )
         ],

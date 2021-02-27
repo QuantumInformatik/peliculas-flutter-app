@@ -1,4 +1,5 @@
 
+
 import 'package:flutter/material.dart';
 import 'package:peliculas/src/providers/PeliculasProviders.dart';
 import 'package:peliculas/src/search/PeliculasSearchDelegate.dart';
@@ -16,13 +17,14 @@ class HomePage extends StatelessWidget {
     print("home page w: "+(_screenSize.width).toString());
     print("home page h: "+(_screenSize.height).toString());
 
+
     peliculasProvider.getPopulares();
 
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: Text('Peliculas en cines'),
-        backgroundColor: Colors.indigoAccent,
+        title: Text('FlutFlix'),
+        backgroundColor: Color(0xFF107D36),
         actions: [
           IconButton(
             icon: Icon(Icons.search),
@@ -34,7 +36,7 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: Container(
-        decoration: BoxDecoration(color: Colors.black) ,
+        decoration: BoxDecoration(color: Colors.black87.withOpacity(0.93)) ,
         height: _screenSize.height,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -65,7 +67,14 @@ class HomePage extends StatelessWidget {
           children: [
             Container(
                 padding: EdgeInsets.only(left: 20.0),
-              child: Text('Populares', style: Theme.of(context).textTheme.subtitle1)
+              child: Text(
+                'Populares',
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.white,
+              ),
+
+              ) //'Populares', style: Theme.of(context).textTheme.subtitle1
             ),
             SizedBox(height: 5.0,),
 
@@ -73,7 +82,10 @@ class HomePage extends StatelessWidget {
               stream: peliculasProvider.popularesStrem,
               builder: (BuildContext context, AsyncSnapshot<List> asyncSnapshot){
                 if(asyncSnapshot.hasData){
-                  return MovieHorizontal(peliculas: asyncSnapshot.data, siguientePagina: peliculasProvider.getPopulares,);
+                  return MovieHorizontal(
+                    peliculas: asyncSnapshot.data,
+                    siguientePagina: peliculasProvider.getPopulares,
+                  );
                 }
                 return Center(
                   child: CircularProgressIndicator(),
