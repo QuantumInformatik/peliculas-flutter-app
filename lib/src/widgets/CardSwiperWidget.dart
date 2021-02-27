@@ -11,8 +11,13 @@ class CardSwiper extends StatelessWidget {
   Widget build(BuildContext context) {
     final _screeSize = MediaQuery.of(context).size;
 
+    print("80% "+(_screeSize.width*0.80).toString());
+
     return Container(
+      width: _screeSize.width*0.80,
+      decoration: BoxDecoration(color: Colors.amber) ,
       padding: EdgeInsets.only(top: 10.0),
+      margin: EdgeInsets.only(left: 10.0),
       child: Swiper(
         itemBuilder: (BuildContext context,int index){
           peliculas[index].idUnico = '${peliculas[index].id}-tarjeta';

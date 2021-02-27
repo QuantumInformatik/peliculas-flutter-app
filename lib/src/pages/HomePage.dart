@@ -12,6 +12,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _screenSize = MediaQuery.of(context).size;
+    print("home page w: "+(_screenSize.width).toString());
+    print("home page h: "+(_screenSize.height).toString());
 
     peliculasProvider.getPopulares();
 
@@ -31,12 +34,21 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: Container(
+        decoration: BoxDecoration(color: Colors.tealAccent) ,
+        height: _screenSize.height,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _swiperTarjetas(),
-            _footer(context)
+          children: <Widget>[
+            Flexible(
+                flex: 2,
+                child:_swiperTarjetas()
+            ),
+            Flexible(
+              flex: 1,
+                child: _footer(context)
+            ),
           ],
+
         ),
       )
     );
@@ -48,13 +60,19 @@ class HomePage extends StatelessWidget {
     return Container(
         width: double.infinity,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: EdgeInsets.only(left: 20.0),
+                decoration: BoxDecoration(color: Colors.indigo) ,
+                padding: EdgeInsets.only(left: 20.0),
               child: Text('Populares', style: Theme.of(context).textTheme.subtitle1)
             ),
-            SizedBox(height: 5.0,),
+            SizedBox(height: 5.0,
+              child: Container(
+                decoration: BoxDecoration(color: Colors.indigo) ,
+              ),
+            ),
             StreamBuilder(
               stream: peliculasProvider.popularesStrem,
               builder: (BuildContext context, AsyncSnapshot<List> asyncSnapshot){
@@ -64,7 +82,7 @@ class HomePage extends StatelessWidget {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-                
+
               },
             )
           ],

@@ -21,17 +21,20 @@ class MovieHorizontal extends StatelessWidget {
     });
 
 
-    return Container(
-      height: _screenSize.height*0.23,
-      child: PageView.builder(
-        pageSnapping: false,
-        controller: _pageController,
-        itemCount: peliculas.length,
-        itemBuilder: (context, index){
-          return _crearTarjeta(context, peliculas[index]);
+    return Flexible(
+        child: Container(
+          height: _screenSize.height*0.23,
+          decoration: BoxDecoration(color: Colors.brown) ,
+          child: PageView.builder(
+            pageSnapping: false,
+            controller: _pageController,
+            itemCount: peliculas.length,
+            itemBuilder: (context, index){
+              return _crearTarjeta(context, peliculas[index]);
 
-        },
-      ),
+            },
+          ),
+        )
     );
   }
 
@@ -42,19 +45,24 @@ class MovieHorizontal extends StatelessWidget {
       margin: EdgeInsets.only(right: 15.0),
       child: Column(
         children: [
-          Hero(
-            tag: pelicula.idUnico,
-            child:  ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: FadeInImage(
-                image: NetworkImage(pelicula.getPosterImg()),
-                placeholder: AssetImage('assets/img/no-image.jpg'),
-                fit: BoxFit.cover,
-                height: 130.0,
+          Flexible(
+              child:Hero(
+                tag: pelicula.idUnico,
+                child:  ClipRRect(
+                  borderRadius: BorderRadius.circular(20.0),
+                  child: FadeInImage(
+                    image: NetworkImage(pelicula.getPosterImg()),
+                    placeholder: AssetImage('assets/img/no-image.jpg'),
+                    fit: BoxFit.cover,
+                    height: 130.0,
+                  ),
+                ),
               ),
-            ),
           ),
-          SizedBox(height: 5.0,),
+          SizedBox(height: 5.0,
+            child:Container(
+              decoration: BoxDecoration(color: Colors.indigo) ,
+            ) ,),
           Center(
             child: Text(
               pelicula.title,
